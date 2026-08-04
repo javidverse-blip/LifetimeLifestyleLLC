@@ -9,7 +9,7 @@
     "dev": "next dev",
     "build": "next build",
     "build:hostinger": "next build",
-    "start": "next start -H 0.0.0.0",
+    "start": "node server.js",
     "lint": "tsc --noEmit"
   },
   "dependencies": {
