@@ -31,14 +31,17 @@ Recommended settings:
 - Start command: `npm run start`
 - Application port: the port provided by Hostinger through `PORT`
 
+The build uses the webpack pipeline (`next build --webpack`) because Hostinger's Passenger runtime returns 503 on Next.js 16's default Turbopack production output. There is no custom server — the app runs with `next start`.
+
 hPanel (Deployments → Deployment settings) values for the git deploy:
 
 - Framework preset: `Other`
-- Node.js version: `20`
+- Node.js version: `20` (must be `20.9` or newer — the `engines` field requires it)
 - Build command: `npm run build`
+- Start command: `npm run start`
 - Package manager: `npm`
 - Output directory: leave **empty** — setting it classifies the app as static and Hostinger won't run the Node process
-- Entry file: `server.js` (starts the app and binds `process.env.PORT`)
+- Entry file: leave **empty** — do NOT set it to `server.js` (that file no longer exists). The app is started through `npm run start`.
 
 Upload the source project without `node_modules`, `.next`, or local environment files. Run `npm install` and `npm run build` on the server, then start the application through Hostinger's Node.js app manager.
 
