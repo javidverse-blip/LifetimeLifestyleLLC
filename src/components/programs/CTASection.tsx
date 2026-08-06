@@ -8,18 +8,18 @@ export function CTASection({
   ctaLabel: string;
 }) {
   return (
-    <section className="bg-[var(--teal)]">
+    <section className="bg-[var(--mist)]">
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <Reveal>
-          <div className="px-6 py-16 text-center text-white sm:px-12 sm:py-20">
+          <div className="px-6 py-16 text-center text-[var(--green)] sm:px-12 sm:py-20">
             <div className="mx-auto max-w-2xl">
-              <p className="font-accent text-xs font-bold uppercase tracking-[0.25em] text-brand-yellow">
+              <p className="font-accent text-xs font-bold uppercase tracking-[0.25em] text-[var(--gold-deep)]">
                 Ready to begin?
               </p>
-              <h2 className="mt-4 text-balance text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
+              <h2 className="mt-4 text-balance text-3xl font-extrabold tracking-tight text-[var(--green)] sm:text-5xl">
                 Your next season starts with one step
               </h2>
-              <p className="mt-5 text-base leading-relaxed text-white/85 sm:text-lg">
+              <p className="mt-5 text-base leading-relaxed text-slate-600 sm:text-lg">
                 One step changes everything. Start your transformation today —
                 every purchase is securely processed and delivered by Stan
                 Store.
@@ -48,12 +48,12 @@ export function CTASection({
               </a>
               <a
                 href="mailto:lifetimelifestylellc@gmail.com"
-                className="inline-flex items-center gap-2 rounded-full border-2 border-white/40 px-8 py-3.5 font-accent text-base font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-white hover:text-brand-ink"
+                className="inline-flex items-center gap-2 rounded-full border-2 border-[var(--teal)]/40 px-8 py-3.5 font-accent text-base font-bold text-[var(--teal)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-white hover:text-[var(--green)]"
               >
                 Contact Us
               </a>
             </div>
-            <p className="mt-6 text-xs text-white/60">
+            <p className="mt-6 text-xs text-[var(--teal)]/60">
               Secure checkout · Instant digital delivery · Powered by Stan Store
             </p>
           </div>
