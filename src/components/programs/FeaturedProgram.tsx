@@ -18,10 +18,10 @@ const highlights = [
 export function FeaturedProgram({ program }: { program: Program }) {
   return (
     <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-      <div className="group relative grid overflow-hidden rounded-4xl bg-[#05698e] shadow-card-hover lg:grid-cols-2">
+      <div className="group relative grid overflow-hidden rounded-4xl bg-[var(--green)] shadow-card-hover lg:grid-cols-2">
         <div className="relative aspect-square">
           <Image
-            src={program.bannerImage}
+            src={program.bannerImage ?? program.thumbnail ?? ""}
             alt={program.title}
             fill
             priority

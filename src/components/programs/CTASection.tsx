@@ -8,10 +8,10 @@ export function CTASection({
   ctaLabel: string;
 }) {
   return (
-    <section className="bg-slate-50/70">
+    <section className="bg-[var(--teal)]">
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <Reveal>
-          <div className="rounded-4xl bg-[#05698e] px-6 py-16 text-center text-white shadow-soft sm:px-12 sm:py-20">
+          <div className="px-6 py-16 text-center text-white sm:px-12 sm:py-20">
             <div className="mx-auto max-w-2xl">
               <p className="font-accent text-xs font-bold uppercase tracking-[0.25em] text-brand-yellow">
                 Ready to begin?

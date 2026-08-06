@@ -4,8 +4,8 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: { default: "Lifetime Lifestyle | Healthy families. Strong legacies.", template: "%s | Lifetime Lifestyle" },
-  description: "Simple, faith-filled resources to help families grow healthy and strong; inside and out.",
+  title: { default: "Lifetime Lifestyle | Biblical Health, Publishing & Community", template: "%s | Lifetime Lifestyle" },
+  description: "Helping families, authors, and individuals transform their lives through biblical health, publishing, and education.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

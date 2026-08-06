@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root { --navy: #05698e; --blue: #05698e; --yellow: #feca05; --green: #96ffac; --ink: #05698e; --paper: #fff; --peach: #feca05; --sage: #05698e; --rust: #feca05; }
+:root { --navy: #148691; --blue: #148691; --teal: #148691; --teal-light: #148691; --yellow: #e4ad35; --gold: #e4ad35; --gold-deep: #d19f3c; --green: #148691; --ink: #148691; --paper: #fff; --peach: #d19f3c; --sage: #5ba0a5; --rust: #d19f3c; --brown: #8b6f52; --brown-dark: #6b5238; --brown-light: #c49a6c; --mist: #e6f2f0; }
 :root { --font-nunito: "Nunito"; --font-roboto: "Roboto"; --font-montserrat: "Montserrat"; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; overflow-x: clip; }

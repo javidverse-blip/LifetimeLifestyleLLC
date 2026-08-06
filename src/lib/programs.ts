@@ -14,18 +14,26 @@ import type { Program, ProgramCategory, ProgramCategoryMeta } from "@/lib/types"
  */
 
 export async function getAllPrograms(): Promise<Program[]> {
-  const visible = mockPrograms.filter((p) => !p.comingSoon || p.isNew);
   const order = new Map([
     ["3-day-sugar-reset", 0],
     ["5-day-water-reset", 1],
-    ["gods-healthy-laws-family-reset", 2],
+    ["hidden-in-plain-sight-discovery-guide", 2],
     ["god-invented-intermittent-fasting", 3],
-    ["book-a-1-1-coaching-call", 4],
-    ["hidden-in-plain-sight-discovery-guide", 5],
-    ["feeble-to-fabulous-academy", 6],
-    ["community-is-the-cure", 7],
+    ["gods-healthy-laws", 4],
+    ["but-i-dont-like-water", 5],
+    ["future-health-resets", 6],
+    ["book-a-1-1-coaching-call", 7],
+    ["feeble-to-fabulous-academy", 8],
+    ["community-is-the-cure", 9],
+    ["praise-no-matter-what-happens", 10],
+    ["whos-voice-are-you-listening-to", 11],
+    ["the-voice-you-lead-will-feed", 12],
+    ["gods-healthy-laws-family-reset", 13],
+    ["family-worship-theater", 14],
+    ["childrens-books", 15],
+    ["family-devotionals", 16],
   ]);
-  return [...visible].sort(
+  return [...mockPrograms].sort(
     (a, b) =>
       (order.get(a.slug) ?? 99) - (order.get(b.slug) ?? 99) ||
       a.title.localeCompare(b.title),
@@ -36,13 +44,17 @@ export async function getFeaturedProgram(): Promise<Program | null> {
   return mockPrograms.find((p) => p.featured) ?? null;
 }
 
+export async function getFeaturedPrograms(count = 3): Promise<Program[]> {
+  const featured = mockPrograms.filter((p) => p.featured);
+  const rest = mockPrograms.filter((p) => !p.featured);
+  return [...featured, ...rest].slice(0, count);
+}
+
 export const CATEGORIES: ProgramCategoryMeta[] = [
   { id: "all", label: "All Programs" },
-  { id: "coaching", label: "Coaching" },
-  { id: "challenges", label: "Challenges" },
-  { id: "courses", label: "Courses" },
-  { id: "digital-resources", label: "Digital Resources" },
-  { id: "free-resources", label: "Free Resources" },
+  { id: "health", label: "Health" },
+  { id: "healing", label: "Healing & Spiritual Growth" },
+  { id: "family", label: "Family" },
 ];
 
 export function getCategoryLabel(

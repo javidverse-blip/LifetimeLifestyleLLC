@@ -13,14 +13,22 @@ export function ProgramCard({ program }: { program: Program }) {
         className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-teal"
         aria-label={`${program.title} — view on Stan Store`}
       >
-        <div className="relative aspect-[4/3] overflow-hidden">
-          <Image
-            src={program.thumbnail}
-            alt={program.title}
-            fill
-            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-          />
+        <div className="relative aspect-[4/3] overflow-hidden bg-[var(--mist)]">
+          {program.thumbnail ? (
+            <Image
+              src={program.thumbnail}
+              alt={program.title}
+              fill
+              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-[var(--teal)] to-[var(--green)]">
+              <span className="text-6xl drop-shadow-sm" aria-hidden>
+                {program.icon}
+              </span>
+            </div>
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-brand-ink/40 via-transparent to-transparent opacity-70" />
           <div className="absolute left-4 top-4 flex flex-wrap gap-2">
             {program.featured && <Badge tone="featured">Featured</Badge>}

@@ -1,9 +1,4 @@
-export type ProgramCategory =
-  | "coaching"
-  | "challenges"
-  | "courses"
-  | "digital-resources"
-  | "free-resources";
+export type ProgramCategory = "health" | "healing" | "family";
 
 export interface FaqItem {
   question: string;
@@ -30,10 +25,12 @@ export interface Program {
   category: ProgramCategory;
   /** Short marketing hook shown under the title. */
   tagline: string;
-  /** Card thumbnail (local path under /public). */
-  thumbnail: string;
-  /** Large hero / banner image (local path under /public). */
-  bannerImage: string;
+  /** Card thumbnail (local path under /public). Omit when no photo is available. */
+  thumbnail?: string;
+  /** Emoji icon shown when no thumbnail is available. */
+  icon?: string;
+  /** Large hero / banner image (local path under /public). Omit when none exists. */
+  bannerImage?: string;
   /** One-to-two sentence summary for cards and search results. */
   shortDescription: string;
   /** Full description, paragraphs separated by blank lines. */
