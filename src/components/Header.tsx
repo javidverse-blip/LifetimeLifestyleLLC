@@ -16,12 +16,12 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-black/10 bg-white">
-      <div className="container flex min-h-[80px] items-center justify-between gap-6">
+      <div className="container flex min-h-[96px] items-center justify-between gap-6">
         <Link href="/" onClick={() => setOpen(false)}>
           <img
             src="/images/brand/new-logo.png"
             alt="Lifetime Lifestyle"
-            className="h-[54px] w-auto"
+            className="h-[56px] w-auto sm:h-[72px]"
           />
         </Link>
 
