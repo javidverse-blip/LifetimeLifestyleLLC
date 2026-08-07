@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 
 type PublishingTab = "services" | "academy" | "books";
 
+const TAB_ORDER: PublishingTab[] = ["services", "academy", "books"];
+
 const TAB_CARDS: {
   id: PublishingTab;
   icon: string;
@@ -147,9 +149,17 @@ export function PublishingBrowser({
     window.location.hash = tab;
   };
 
+  const nextTab =
+    TAB_ORDER[(TAB_ORDER.indexOf(active) + 1) % TAB_ORDER.length];
+
+  const browseNext = () => {
+    select(nextTab);
+    document.getElementById("browse")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <>
-      <section className="bg-[var(--mist)]">
+      <section id="browse" className="scroll-mt-20 bg-[var(--mist)]">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <p className="mb-3 font-montserrat text-xs font-bold uppercase tracking-[0.2em] text-[var(--teal)]">
@@ -163,7 +173,7 @@ export function PublishingBrowser({
               with you from manuscript to marketplace.
             </p>
           </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
+          <div className="-mx-4 mt-12 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0">
             {TAB_CARDS.map((tab) => {
               const isActive = active === tab.id;
               return (
@@ -172,27 +182,27 @@ export function PublishingBrowser({
                   type="button"
                   onClick={() => select(tab.id)}
                   aria-pressed={isActive}
-                  className={`group flex flex-col rounded-[1.75rem] border p-8 text-left shadow-[0_10px_30px_-12px_rgba(20,134,145,0.25)] transition-all duration-300 hover:-translate-y-1.5 ${
+                  className={`group flex min-w-[13rem] snap-start flex-col rounded-2xl border p-4 text-left shadow-[0_10px_30px_-12px_rgba(20,134,145,0.25)] transition-all duration-300 hover:-translate-y-1.5 md:min-w-0 md:rounded-[1.75rem] md:p-8 ${
                     isActive
                       ? "border-[var(--teal)] bg-[var(--green)] text-white shadow-[0_22px_45px_-18px_rgba(20,134,145,0.55)]"
                       : "border-black/5 bg-white text-[var(--green)] hover:bg-white hover:shadow-[0_18px_40px_-16px_rgba(20,134,145,0.35)]"
                   }`}
                 >
-                  <span className="text-4xl" aria-hidden>
+                  <span className="text-2xl md:text-4xl" aria-hidden>
                     {tab.icon}
                   </span>
-                  <h3 className="mt-5 font-display text-2xl font-extrabold leading-tight">
+                  <h3 className="mt-3 font-display text-lg font-extrabold leading-tight md:mt-5 md:text-2xl">
                     {tab.label}
                   </h3>
                   <p
-                    className={`mt-3 flex-1 text-base leading-7 ${
+                    className={`mt-2 line-clamp-3 text-xs leading-5 md:mt-3 md:line-clamp-none md:flex-1 md:text-base md:leading-7 ${
                       isActive ? "text-white/80" : "text-slate-600"
                     }`}
                   >
                     {tab.blurb}
                   </p>
                   <span
-                    className={`mt-6 inline-flex items-center gap-2 font-montserrat text-sm font-bold transition-colors ${
+                    className={`mt-4 inline-flex items-center gap-2 font-montserrat text-xs font-bold transition-colors md:mt-6 md:text-sm ${
                       isActive
                         ? "text-[var(--gold)] group-hover:text-white"
                         : "text-[var(--teal)] group-hover:text-[var(--gold-deep)]"
@@ -204,6 +214,9 @@ export function PublishingBrowser({
               );
             })}
           </div>
+          <p className="mt-3 text-center text-xs font-semibold text-[var(--teal)] md:hidden">
+            Swipe to explore all paths
+          </p>
         </div>
       </section>
 
@@ -461,6 +474,19 @@ export function PublishingBrowser({
           </div>
         </section>
       )}
+
+      <div className="bg-white py-16">
+        <div className="flex justify-center">
+          <button
+            type="button"
+            onClick={browseNext}
+            className="inline-flex items-center gap-2 rounded-full bg-[var(--gold)] px-9 py-4 font-accent text-base font-bold text-[var(--green)] shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--green)] hover:text-white"
+          >
+            Browse {TAB_CARDS.find((t) => t.id === nextTab)?.label}
+            {ChevronRight}
+          </button>
+        </div>
+      </div>
     </>
   );
 }

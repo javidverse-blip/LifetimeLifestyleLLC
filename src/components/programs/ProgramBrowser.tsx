@@ -41,6 +41,8 @@ const SECTION_SUBTITLES: Record<ProgramCategory, string> = {
     "Books, devotionals, and activities that help families grow together — body and spirit.",
 };
 
+const CATEGORY_ORDER: ProgramCategory[] = ["health", "healing", "family"];
+
 export function ProgramBrowser({ programs }: { programs: Program[] }) {
   const [active, setActive] = useState<ProgramCategory>("health");
 
@@ -59,6 +61,14 @@ export function ProgramBrowser({ programs }: { programs: Program[] }) {
   const select = (category: ProgramCategory) => {
     setActive(category);
     window.location.hash = category;
+  };
+
+  const nextCategory =
+    CATEGORY_ORDER[(CATEGORY_ORDER.indexOf(active) + 1) % CATEGORY_ORDER.length];
+
+  const browseNext = () => {
+    select(nextCategory);
+    document.getElementById("browse")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const activePrograms = programs.filter((p) => p.category === active);
@@ -80,7 +90,7 @@ export function ProgramBrowser({ programs }: { programs: Program[] }) {
               trackers, and activities.
             </p>
           </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
+          <div className="-mx-4 mt-12 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0">
             {CATEGORY_CARDS.map((category) => {
               const isActive = active === category.id;
               return (
@@ -89,27 +99,27 @@ export function ProgramBrowser({ programs }: { programs: Program[] }) {
                   type="button"
                   onClick={() => select(category.id)}
                   aria-pressed={isActive}
-                  className={`group flex flex-col rounded-[1.75rem] border p-8 text-left shadow-[0_10px_30px_-12px_rgba(20,134,145,0.4)] transition-all duration-300 hover:-translate-y-1.5 ${
+                  className={`group flex min-w-[13rem] snap-start flex-col rounded-2xl border p-4 text-left shadow-[0_10px_30px_-12px_rgba(20,134,145,0.4)] transition-all duration-300 hover:-translate-y-1.5 md:min-w-0 md:rounded-[1.75rem] md:p-8 ${
                     isActive
                       ? "border-white bg-white text-[var(--green)] shadow-[0_22px_45px_-18px_rgba(20,134,145,0.55)]"
                       : "border-white/10 bg-white/10 text-white hover:bg-white/15"
                   }`}
                 >
-                  <span className="text-4xl" aria-hidden>
+                  <span className="text-2xl md:text-4xl" aria-hidden>
                     {category.icon}
                   </span>
-                  <h2 className="mt-5 font-display text-2xl font-extrabold leading-tight">
+                  <h2 className="mt-3 font-display text-lg font-extrabold leading-tight md:mt-5 md:text-2xl">
                     {getCategoryLabel(category.id)}
                   </h2>
                   <p
-                    className={`mt-3 flex-1 text-base leading-7 ${
+                    className={`mt-2 line-clamp-3 text-xs leading-5 md:mt-3 md:line-clamp-none md:flex-1 md:text-base md:leading-7 ${
                       isActive ? "text-slate-600" : "text-white/80"
                     }`}
                   >
                     {category.blurb}
                   </p>
                   <span
-                    className={`mt-6 inline-flex items-center gap-2 font-montserrat text-sm font-bold transition-colors ${
+                    className={`mt-4 inline-flex items-center gap-2 font-montserrat text-xs font-bold transition-colors md:mt-6 md:text-sm ${
                       isActive
                         ? "text-brand-teal group-hover:text-[var(--gold-deep)]"
                         : "text-brand-yellow group-hover:text-white"
@@ -122,7 +132,7 @@ export function ProgramBrowser({ programs }: { programs: Program[] }) {
                       strokeWidth="2.5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="h-4 w-4"
+                      className="h-3.5 w-3.5 md:h-4 md:w-4"
                       aria-hidden
                     >
                       <path d="M12 5v14" />
@@ -133,10 +143,13 @@ export function ProgramBrowser({ programs }: { programs: Program[] }) {
               );
             })}
           </div>
+          <p className="mt-3 text-center text-xs font-semibold text-white/60 md:hidden">
+            Swipe to explore all paths
+          </p>
         </div>
       </section>
 
-      <section className="bg-white">
+      <section id="browse" className="scroll-mt-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <p className="mb-3 font-accent text-xs font-bold uppercase tracking-[0.2em] text-brand-teal">
@@ -158,6 +171,29 @@ export function ProgramBrowser({ programs }: { programs: Program[] }) {
 
           <div className="mt-12">
             <ProgramGrid programs={activePrograms} />
+          </div>
+
+          <div className="mt-12 flex justify-center">
+            <button
+              type="button"
+              onClick={browseNext}
+              className="inline-flex items-center gap-2 rounded-full bg-brand-teal px-9 py-4 font-accent text-base font-bold text-white shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-yellow hover:text-brand-ink"
+            >
+              Browse {getCategoryLabel(nextCategory)}
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-4 w-4"
+                aria-hidden
+              >
+                <path d="M5 12h14" />
+                <path d="m13 6 6 6-6 6" />
+              </svg>
+            </button>
           </div>
         </div>
       </section>
